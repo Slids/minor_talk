@@ -1,22 +1,15 @@
 #include <iostream>
 #include <thread>
-#include <mutex>
+#include <atomic>
 
-
-std::mutex ex;
-
-void add_one(int* my_pointer){
-  ex.lock();
-  *my_pointer += 1;
-  ex.unlock();
-  std::cout << "Out from add_one: " << *my_pointer << "\n";
-}
-
-void add_two(int* my_pointer){
-  ex.lock();
-  *my_pointer += 2;
-  ex.unlock();
-  std::cout << "Out from add_two: " << *my_pointer << "\n";
+void add(int delta, std::atomic<int>* my_ref){
+  int val = (*my_ref).load();
+  while(!(*my_ref).compare_exchange_weak(val, val+delta,
+  				      std::memory_order_release,
+  				      std::memory_order_relaxed)) {
+    val = (*my_ref).load();
+  }
+  std::cout << "Out from add: " << (*my_ref).load() << "\n";
 }
 
 int main(int argc, char *argv[]) {
@@ -27,11 +20,12 @@ int main(int argc, char *argv[]) {
     num_runs = atoi(argv[1]);
   }
 
+  std::atomic<int> my_int(0);
   for(int i = 0; i < num_runs; i++) {
-    int my_int = 0;
+    my_int.store(0);
 
-    std::thread add_one_thread(add_one, &my_int);
-    std::thread add_two_thread(add_two, &my_int);
+    std::thread add_one_thread(add, 1, &my_int);
+    std::thread add_two_thread(add, 2, &my_int);
 
     add_one_thread.join();
     add_two_thread.join();
@@ -42,6 +36,7 @@ int main(int argc, char *argv[]) {
     
     std::cout << "Final Value: " << my_int << "\n";
   }
+  
   std::cout << "Total times wrong final value: " << num_tragic_errors << "\n";
 
   if(num_runs != 0) {

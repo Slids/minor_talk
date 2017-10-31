@@ -10,3 +10,9 @@ cc_binary(
     linkopts = ['-pthread'],
 )
 
+cc_binary(
+    name = "multi_thread_cas",
+    srcs = ["multi_thread_cas.cc"],
+    linkopts = ['-pthread'],
+)
+

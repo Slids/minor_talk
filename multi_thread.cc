@@ -4,12 +4,12 @@
 
 void add_one(int* my_pointer){
   *my_pointer += 1;
-  //std::cout << "Out from add_one: " << *my_pointer << "\n";
+  std::cout << "Out from add_one: " << *my_pointer << "\n";
 }
 
 void add_two(int* my_pointer){
   *my_pointer += 2;
-  //std::cout << "Out from add_two: " << *my_pointer << "\n";
+  std::cout << "Out from add_two: " << *my_pointer << "\n";
 }
 
 int main(int argc, char *argv[]) {
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
       num_tragic_errors++;
     }
     
-    //std::cout << "Final Value: " << my_int << "\n";
+    std::cout << "Final Value: " << my_int << "\n";
   }
   std::cout << "Total times wrong final value: " << num_tragic_errors << "\n";
 
