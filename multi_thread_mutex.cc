@@ -1,14 +1,21 @@
 #include <iostream>
 #include <thread>
-#include <string>
+#include <mutex>
+
+
+std::mutex ex;
 
 void add_one(int* my_pointer){
+  ex.lock();
   *my_pointer += 1;
+  ex.unlock();
   //std::cout << "Out from add_one: " << *my_pointer << "\n";
 }
 
 void add_two(int* my_pointer){
+  ex.lock();
   *my_pointer += 2;
+  ex.unlock();
   //std::cout << "Out from add_two: " << *my_pointer << "\n";
 }
 
