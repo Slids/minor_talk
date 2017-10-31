@@ -16,3 +16,9 @@ cc_binary(
     linkopts = ['-pthread'],
 )
 
+cc_binary(
+    name = "basic_add",
+    srcs = ["basic_add.cc"],
+    linkopts = ['-pthread'],
+)
+
