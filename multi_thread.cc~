@@ -1,7 +1,0 @@
-#include <iostream>
-#include <thread>
-
-add_one(int* my_pointer){
-  *my_pointer += 1;
-  cout << *my_pointer;
-}
