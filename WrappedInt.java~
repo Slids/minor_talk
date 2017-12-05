@@ -1,0 +1,16 @@
+class WrappedInt {
+    WrappedInt() {
+	val = 0;
+    }
+    public int val;
+
+    public void addOne() {
+	val += 1;
+	System.out.println("Out from addOne is: " + val);
+    }
+    
+    public void addTwo() {
+	val += 2;
+	System.out.println("Out from addTwo is: " + val);
+    }
+}

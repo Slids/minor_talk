@@ -22,3 +22,35 @@ cc_binary(
     linkopts = ['-pthread'],
 )
 
+
+java_binary(
+    name = "basic_add_java",
+    srcs = [
+        "BasicAdd.java",
+    ],
+    main_class = "BasicAdd",
+)
+
+java_binary(
+    name = "MultiThreadJava",
+    srcs = [
+    	 "MultiThread.java",
+    ],
+    main_class = "MultiThread",
+)
+
+java_binary(
+    name = "MultiThreadMutexJava",
+    srcs = [
+        "MultiThreadMutex.java",
+    ],
+    main_class = "MultiThreadMutex",
+)
+
+java_binary(
+    name = "MultiThreadCasJava",
+    srcs = [
+        "MultiThreadCas.java",
+    ],
+    main_class = "MultiThreadCas",
+)
